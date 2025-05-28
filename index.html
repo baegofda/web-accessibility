@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next.js 성장 일대기</title>
+    <link rel="stylesheet" href="reveal.css" />
+    <link rel="stylesheet" href="theme/black.css" />
+    <style>
+      .reveal {
+        font-size: 28px;
+      }
+
+      .reveal h1 {
+        font-size: 2.2em;
+        color: #61dafb;
+      }
+
+      .reveal h2 {
+        font-size: 1.8em;
+        margin-bottom: 0;
+        color: #61dafb;
+      }
+
+      .reveal h3 {
+        font-size: 1.4em;
+        color: #61dafb;
+      }
+
+      .reveal p {
+        text-align: left;
+        margin: 15px 0;
+      }
+
+      .reveal ul {
+        margin: 0.5em 0;
+        padding: 0;
+      }
+
+      .reveal li {
+        margin: 0.3em 0;
+        font-size: 0.9em;
+      }
+
+      .reveal li ul {
+        margin-left: 1.5em;
+      }
+
+      .version-badge {
+        background-color: #0070f3;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        margin-right: 8px;
+      }
+
+      .reason {
+        color: #888;
+        font-size: 0.8em;
+        margin: 0 !important;
+        text-align: center !important;
+      }
+
+      .slides {
+        width: 90% !important;
+        height: 90% !important;
+      }
+
+      .reveal .slides section {
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+      }
+
+      .reveal .slides section:first-child {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Next.js 성장 일대기</h1>
+          <p style="text-align: center">
+            Next.js 1.0부터 15.0까지의 주요 변경사항과 업데이트 배경
+          </p>
+        </section>
+
+        <section>
+          <h2>웹 개발의 진화 과정</h2>
+          <ul>
+            <li>
+              초기 웹 개발 (1990년대)
+              <ul>
+                <li>정적 HTML 페이지</li>
+                <li>서버에서 직접 HTML 파일 제공</li>
+                <li>동적 콘텐츠 부재</li>
+              </ul>
+            </li>
+            <li>
+              서버 사이드 템플릿 엔진 (2000년대 초)
+              <ul>
+                <li>JSP, PHP, ASP 등 등장</li>
+                <li>서버에서 HTML 템플릿과 데이터 결합</li>
+                <li>동적 콘텐츠 생성 가능</li>
+                <li>페이지 전체 새로고침 필요</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>AJAX의 혁명 (2005년)</h2>
+          <ul>
+            <li>
+              Asynchronous JavaScript and XML
+              <ul>
+                <li>비동기 데이터 교환 가능</li>
+                <li>페이지 새로고침 없이 데이터 업데이트</li>
+                <li>더 나은 사용자 경험 제공</li>
+              </ul>
+            </li>
+            <li>
+              주요 변화
+              <ul>
+                <li>프론트엔드와 백엔드의 명확한 분리</li>
+                <li>데이터 교환 레이어와 프레젠테이션 레이어 분리</li>
+                <li>웹 애플리케이션의 상호작용성 향상</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CSR 시대의 도래 (2010년대 초)</h2>
+          <ul>
+            <li>React, Angular, Vue 등 SPA 프레임워크 등장</li>
+            <li>
+              주요 특징
+              <ul>
+                <li>클라이언트 사이드에서 모든 렌더링 수행</li>
+                <li>초기 로드 후 빠른 페이지 전환</li>
+                <li>리치한 사용자 인터페이스 구현 가능</li>
+              </ul>
+            </li>
+            <li>
+              장점
+              <ul>
+                <li>부드러운 사용자 경험</li>
+                <li>서버 부하 감소</li>
+                <li>오프라인 기능 구현 가능</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>CSR의 한계점</h2>
+          <ul>
+            <li>
+              성능 문제
+              <ul>
+                <li>
+                  초기 로딩 시간 증가
+                  <ul>
+                    <li>큰 자바스크립트 번들 크기</li>
+                    <li>First Contentful Paint (FCP) 지연</li>
+                    <li>Time to Interactive (TTI) 지연</li>
+                  </ul>
+                </li>
+                <li>
+                  네트워크 의존성
+                  <ul>
+                    <li>느린 네트워크에서의 성능 저하</li>
+                    <li>모바일 사용자 경험 저하</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              SEO 문제
+              <ul>
+                <li>
+                  검색 엔진 크롤링 어려움
+                  <ul>
+                    <li>초기 HTML이 비어있음</li>
+                    <li>JavaScript 실행 필요</li>
+                    <li>크롤링 지연</li>
+                  </ul>
+                </li>
+                <li>
+                  소셜 미디어 공유 문제
+                  <ul>
+                    <li>메타 태그 동적 생성</li>
+                    <li>미리보기 이미지 문제</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>SSR의 부활 (2010년대 중반)</h2>
+          <ul>
+            <li>서버 사이드 렌더링의 필요성 재발견</li>
+            <li>
+              주요 동기
+              <ul>
+                <li>SEO 최적화 필요성</li>
+                <li>초기 로딩 성능 개선</li>
+                <li>소셜 미디어 공유 최적화</li>
+              </ul>
+            </li>
+            <li>
+              새로운 도전
+              <ul>
+                <li>
+                  프론트엔드 개발자의 확장된 역할
+                  <ul>
+                    <li>서버 운영 및 관리</li>
+                    <li>인프라 지식 필요</li>
+                    <li>배포 및 스케일링 고려</li>
+                  </ul>
+                </li>
+                <li>
+                  복잡한 설정 작업
+                  <ul>
+                    <li>서버 설정</li>
+                    <li>라우팅 설정</li>
+                    <li>데이터 페칭 설정</li>
+                    <li>빌드 최적화</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Next.js의 등장 (2016년)</h2>
+          <ul>
+            <li>React 기반의 풀스택 웹앱 개발 프레임워크</li>
+            <li>
+              주요 목적
+              <ul>
+                <li>
+                  복잡한 설정의 추상화
+                  <ul>
+                    <li>서버 설정 자동화</li>
+                    <li>라우팅 시스템 통합</li>
+                    <li>빌드 최적화 자동화</li>
+                  </ul>
+                </li>
+                <li>
+                  개발자 경험 개선
+                  <ul>
+                    <li>Zero Configuration</li>
+                    <li>Hot Module Replacement</li>
+                    <li>자동 코드 스플리팅</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              핵심 기능
+              <ul>
+                <li>서버 사이드 렌더링</li>
+                <li>정적 사이트 생성</li>
+                <li>API 라우트</li>
+                <li>이미지 최적화</li>
+                <li>국제화 지원</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Next.js 버전별 주요 업데이트</h2>
+        </section>
+
+        <section>
+          <h2>초기 버전 (1.0-4.0)</h2>
+          <ul>
+            <li>
+              서버 사이드 렌더링 (SSR) 지원
+              <ul>
+                <li>초기 HTML 생성</li>
+                <li>SEO 최적화</li>
+                <li>빠른 초기 로딩</li>
+              </ul>
+            </li>
+            <li>
+              CSS-in-JS 지원
+              <ul>
+                <li>스타일 컴포넌트 통합</li>
+                <li>CSS 모듈 지원</li>
+              </ul>
+            </li>
+            <li>
+              TypeScript 지원
+              <ul>
+                <li>타입 안정성</li>
+                <li>개발 생산성 향상</li>
+              </ul>
+            </li>
+            <li>
+              PWA 지원
+              <ul>
+                <li>오프라인 기능</li>
+                <li>모바일 경험 개선</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>중기 버전 (5.0-8.0)</h2>
+          <ul>
+            <li>
+              App 컴포넌트 도입
+              <ul>
+                <li>전역 레이아웃 관리</li>
+                <li>상태 공유</li>
+              </ul>
+            </li>
+            <li>
+              미들웨어 지원
+              <ul>
+                <li>서버 사이드 로직 처리</li>
+                <li>인증/인가 구현</li>
+              </ul>
+            </li>
+            <li>
+              서버리스 배포
+              <ul>
+                <li>Vercel 플랫폼 통합</li>
+                <li>자동 스케일링</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>후기 버전 (9.0-12.0)</h2>
+          <ul>
+            <li>기능 개선 (9.0-10.0)</li>
+            <li>성능 최적화 (11.0-12.0)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>기능 개선 (9.0-10.0)</h2>
+          <ul>
+            <li>
+              이미지 최적화
+              <ul>
+                <li>자동 크기 조정</li>
+                <li>지연 로딩</li>
+                <li>WebP 포맷 지원</li>
+              </ul>
+            </li>
+            <li>
+              국제화 지원
+              <ul>
+                <li>다국어 라우팅</li>
+                <li>로케일 기반 렌더링</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>성능 최적화 (11.0-12.0)</h2>
+          <ul>
+            <li>
+              SWC 컴파일러
+              <ul>
+                <li>빠른 빌드 속도</li>
+                <li>Rust 기반 컴파일러</li>
+                <li>
+                  <a href="https://www.daleseo.com/swc/" target="_blank"
+                    >SWC(Speedy Web Compiler)</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              React 18 지원
+              <ul>
+                <li>동시성 기능</li>
+                <li>자동 일괄 처리</li>
+                <li>
+                  <a
+                    href="https://ko.react.dev/blog/2022/03/29/react-v18"
+                    target="_blank"
+                    >react-v18</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              Turbopack 도입
+              <ul>
+                <li>Vite보다 10배 빠른 빌드 속도</li>
+                <li>Rust 기반의 차세대 번들러</li>
+                <li>증분 컴파일 지원</li>
+                <li>
+                  <a
+                    href="https://velog.io/@sejinkim/Turbopack%EC%9D%B4-Vite%EB%B3%B4%EB%8B%A4-10%EB%B0%B0-%EB%B9%A0%EB%A5%B4%EB%8B%A4"
+                    target="_blank"
+                    >Turbopack이 Vite보다 10배 빠르다?</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Next.js 13버전 이후의 주요 변화</h2>
+          <ul>
+            <li>App Router의 도입</li>
+            <li>서버 컴포넌트의 진화</li>
+            <li>성능 최적화</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>App Router의 도입</h2>
+          <ul>
+            <li>
+              기존의 Pages Router와 대체
+              <ul>
+                <li>라우팅 시스템의 개선</li>
+                <li>서버 컴포넌트의 강력한 지원</li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://nextjs.org/docs/app/getting-started/project-structure"
+                target="_blank"
+                >프로젝트 구조</a
+              >
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>App Router의 레이아웃 시스템</h2>
+          <ul>
+            <li>
+              중첩된 레이아웃 지원
+              <ul>
+                <li>계층적 구조의 레이아웃</li>
+                <li>상태 공유 가능</li>
+                <li>부분 렌더링 지원</li>
+              </ul>
+            </li>
+            <li>
+              로딩 상태 관리
+              <ul>
+                <li>loading.js 파일 지원</li>
+                <li>로딩 UI 자동 처리</li>
+                <li>스트리밍 렌더링</li>
+              </ul>
+            </li>
+            <li>
+              에러 처리
+              <ul>
+                <li>error.js 파일 지원</li>
+                <li>에러 바운더리 자동 적용</li>
+                <li>복구 메커니즘</li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://nextjs.org/docs/app/getting-started/layouts-and-pages"
+                target="_blank"
+                >layouts-and-pages</a
+              >
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>병렬 라우팅과 인터셉팅</h2>
+          <ul>
+            <li>
+              병렬 라우팅
+              <ul>
+                <li>동시에 여러 페이지 렌더링</li>
+                <li>독립적인 네비게이션</li>
+                <li>조건부 레이아웃</li>
+              </ul>
+            </li>
+            <li>
+              인터셉팅 라우트
+              <ul>
+                <li>현재 레이아웃 유지</li>
+                <li>모달 UI 구현 용이</li>
+                <li>사용자 경험 향상</li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://nextjs.org/docs/app/building-your-application/routing/parallel-routes"
+                target="_blank"
+                >병렬 라우팅</a
+              >
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>APP ROUTER의 렌더링 방식</h2>
+          <ul>
+            <li>
+              Static 렌더링
+              <ul>
+                <li>기본 렌더링 방식</li>
+                <li>빌드 시점에 HTML 생성</li>
+              </ul>
+            </li>
+            <li>
+              Dynamic 렌더링
+              <ul>
+                <li>force-dynamic 옵션</li>
+                <li>ISR (Incremental Static Regeneration)</li>
+              </ul>
+            </li>
+            <li>
+              Streaming SSR
+              <ul>
+                <li>Suspense로 감싼 컴포넌트</li>
+                <li>점진적 렌더링 지원</li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching"
+                target="_blank"
+                >data-fetching</a
+              >
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>성능 최적화 기능</h2>
+          <ul>
+            <li>
+              부분 프리렌더링
+              <ul>
+                <li>정적/동적 콘텐츠 혼합</li>
+                <li>빠른 초기 로딩</li>
+                <li>동적 콘텐츠 최적화</li>
+                <li>
+                  <a
+                    href="https://nextjs.org/docs/app/building-your-application/rendering/partial-prerendering"
+                    target="_blank"
+                    >partial-prerenders</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              서버 액션
+              <ul>
+                <li>폼 제출 최적화</li>
+                <li>점진적 향상</li>
+                <li>JavaScript 없이 동작</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>서버 컴포넌트의 진화</h2>
+          <ul>
+            <li>React 컴포넌트란?</li>
+            <li>서버 컴포넌트의 등장</li>
+            <li>서버 컴포넌트의 렌더링</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>React 컴포넌트란?</h2>
+          <ul>
+            <li>
+              컴포넌트의 정의
+              <ul>
+                <li>인자로 데이터를 받는 함수</li>
+                <li>JSX를 반환하는 UI 단위</li>
+                <li>재사용 가능한 코드 블록</li>
+              </ul>
+            </li>
+            <li>
+              렌더링 과정
+              <ul>
+                <li>Babel 변환: JSX → React Element</li>
+                <li>Fiber Node로 확장</li>
+                <li>Virtual DOM 트리 구성</li>
+                <li>실제 DOM 생성</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>서버 컴포넌트의 등장</h2>
+          <ul>
+            <li>
+              기존 컴포넌트의 한계
+              <ul>
+                <li>클라이언트에서만 실행</li>
+                <li>번들 크기 증가</li>
+                <li>데이터 페칭 지연</li>
+              </ul>
+            </li>
+            <li>
+              서버 컴포넌트의 특징
+              <ul>
+                <li>서버에서 실행</li>
+                <li>React API 기반 구현</li>
+                <li>자동 코드 분할</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>서버 컴포넌트의 렌더링</h2>
+          <ul>
+            <li>
+              청크 단위 분할
+              <ul>
+                <li>Suspense Boundary 기준</li>
+                <li>Route Segment 기준</li>
+              </ul>
+            </li>
+            <li>
+              RSC Payload 생성
+              <ul>
+                <li>서버 컴포넌트 렌더 결과</li>
+                <li>클라이언트 컴포넌트 위치 정보</li>
+                <li>Props 전달 데이터</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>클라이언트 렌더링 과정</h2>
+          <ul>
+            <li>
+              초기 렌더링
+              <ul>
+                <li>Route Preview HTML 표시</li>
+                <li>RSC Payload 활용</li>
+                <li>트리 재구성 (Reconciliation)</li>
+              </ul>
+            </li>
+            <li>
+              Hydration
+              <ul>
+                <li>상호작용 가능한 상태로 변환</li>
+                <li>클라이언트 컴포넌트 활성화</li>
+                <li>이벤트 핸들러 연결</li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://nextjs.org/docs/app/building-your-application/rendering/server-components"
+                target="_blank"
+                >server-components</a
+              >
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>서버 데이터 페칭의 이유</h2>
+          <ul>
+            <li>
+              보안 강화
+              <ul>
+                <li>민감한 정보 서버 내 처리</li>
+                <li>클라이언트 노출 최소화</li>
+              </ul>
+            </li>
+            <li>
+              성능 최적화
+              <ul>
+                <li>네트워크 왕복 감소</li>
+                <li>HTML과 데이터 통합 전달</li>
+                <li>JS 번들 크기 감소</li>
+              </ul>
+            </li>
+            <li>SEO 개선</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>결론: Next.js를 사용하는 이유</h2>
+          <ul>
+            <li>
+              성능 최적화
+              <ul>
+                <li>서버 컴포넌트로 인한 번들 크기 감소</li>
+                <li>Streaming SSR로 인한 빠른 초기 로딩</li>
+                <li>부분 프리렌더링으로 최적화된 렌더링</li>
+              </ul>
+            </li>
+            <li>
+              개발자 경험
+              <ul>
+                <li>파일 기반 라우팅으로 직관적인 구조</li>
+                <li>서버 액션으로 간단한 데이터 처리</li>
+                <li>App Router의 강력한 기능들</li>
+              </ul>
+            </li>
+            <li>
+              보안과 SEO
+              <ul>
+                <li>서버 사이드 렌더링으로 SEO 최적화</li>
+                <li>민감한 데이터의 서버 내 처리</li>
+                <li>API 라우트의 안전한 구현</li>
+              </ul>
+            </li>
+            <li>
+              미래 지향적 아키텍처
+              <ul>
+                <li>React의 최신 기능 지원</li>
+                <li>점진적 개선과 혁신</li>
+                <li>커뮤니티와 생태계의 성장</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: false,
+        transition: "slide",
+        backgroundTransition: "fade",
+      });
+    </script>
+  </body>
+</html>

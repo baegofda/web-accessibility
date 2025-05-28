@@ -1,0 +1,18 @@
+{
+  "name": "nextjs-history",
+  "version": "1.0.0",
+  "description": "Next.js 성장 일대기 프레젠테이션",
+  "main": "index.html",
+  "scripts": {
+    "start": "reveal-md index.html --theme black",
+    "build": "mkdir -p dist && cp -r node_modules/reveal.js/dist/* dist/ && cp index.html dist/",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "reveal.js": "^4.5.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "reveal-md": "^5.3.4"
+  }
+}
