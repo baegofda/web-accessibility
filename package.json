@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-history",
+  "name": "web-accessibility",
   "version": "1.0.0",
-  "description": "Next.js 성장 일대기 프레젠테이션",
+  "description": "웹 접근성 프레젠테이션",
   "main": "index.html",
   "scripts": {
     "start": "reveal-md index.html --theme black",
