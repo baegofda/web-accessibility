@@ -3,17 +3,10 @@
   "version": "1.0.0",
   "description": "웹 접근성 프레젠테이션",
   "main": "index.html",
-  "type": "module",
   "scripts": {
-    "start": "reveal-md dist/index.html --theme black",
-    "build": "mkdir -p dist && cp -r node_modules/reveal.js/dist/* dist/ && cp index.html dist/",
-    "deploy": "gh-pages -d dist"
-  },
-  "dependencies": {
-    "reveal.js": "^5.2.1"
+    "start": "http-server"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
-    "reveal-md": "^5.3.4"
+    "http-server": "^14.1.1"
   }
 }
