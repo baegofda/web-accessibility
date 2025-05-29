@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>웹 접근성</title>
+    <link rel="stylesheet" href="reveal.css" />
+    <link rel="stylesheet" href="theme/black.css" />
+    <style>
+      .reveal {
+        font-size: 28px;
+      }
+
+      .reveal h1 {
+        font-size: 2.2em;
+        color: #61dafb;
+      }
+
+      .reveal h2 {
+        font-size: 1.8em;
+        margin-bottom: 0;
+        color: #61dafb;
+      }
+
+      .reveal h3 {
+        font-size: 1.4em;
+        color: #61dafb;
+      }
+
+      .reveal p {
+        text-align: left;
+        margin: 15px 0;
+      }
+
+      .reveal ul {
+        margin: 0.5em 0;
+        padding: 0;
+      }
+
+      .reveal li {
+        margin: 0.3em 0;
+        font-size: 0.9em;
+      }
+
+      .reveal li ul {
+        margin-left: 1.5em;
+      }
+
+      .version-badge {
+        background-color: #0070f3;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        margin-right: 8px;
+      }
+
+      .reason {
+        color: #888;
+        font-size: 0.8em;
+        margin: 0 !important;
+        text-align: center !important;
+      }
+
+      .slides {
+        width: 90% !important;
+        height: 90% !important;
+      }
+
+      .reveal .slides section {
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+      }
+
+      .reveal .slides section:first-child {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>웹 접근성</h1>
+        </section>
+
+        <section>
+          <i>
+            웹의 힘은 보편성에 있습니다. 장애에 상관없이 모두가 접근할 수 있다는
+            것이 가장 중요한 부분입니다.</i
+          ><br />
+          - 팀 버너스리, W3C 디렉터 및 World Wide Web의 창시자
+        </section>
+
+        <section>
+          국내 등록 장애인 비율은 약 263만 명으로 전체 인구 대비 5.1%, 전 세계의
+          비율은 약 15%로 약 10억 명에 해당합니다. <br />국내 65세 이상 고령인구
+          비율은 약 20%로 1,024만 5천 명, 전 세계는 약 10.3%로 약 8.3억 명에
+          해당합니다.
+        </section>
+        <section>
+          <h2>웹 접근성(Web Accessibility)이란?</h2>
+          <ul>
+            <li>
+              웹 접근성이란 사람들의 능력(장애 유무, 연령, 환경)이 어느 정도
+              제약이 있더라도 가능한 많은 웹사이트를 공평하게 사용할 수 있도록
+              보장하는 것 입니다.
+            </li>
+            <li>
+              A11y로 축약됩니다. 이는 "a"와 "y" 사이에 11개의 문자가 있다는
+              의미입니다.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>웹 접근성의 중요성</h2>
+          <ul>
+            <li>
+              사회적 책임
+              <ul>
+                <li>정보 격차 해소, 모두를 위한 평등한 정보 접근 보장</li>
+              </ul>
+            </li>
+            <li>
+              비즈니스 가치
+              <ul>
+                <li>
+                  더 많은 사용자(고령자, 장애인 등) 확보, 브랜드 이미지 개선
+                </li>
+              </ul>
+            </li>
+            <li>
+              SEO 및 사용성 향상
+              <ul>
+                <li>
+                  접근성 개선은 검색엔진 최적화(SEO)와 전반적인 사용자
+                  경험(UX)도 함께 향상
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="http://www.websoul.co.kr/accessibility/laws.asp"
+                target="_blank"
+                >법적 의무</a
+              >
+              <ul>
+                <li>
+                  국내외 다양한 법률(장애인차별금지법, 미국 ADA 등)에서 웹
+                  접근성 준수를 요구
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>웹 접근성의 주요 유형</h2>
+          <ul>
+            <li>
+              시각적 접근성
+              <ul>
+                <li>
+                  시각장애인(전맹, 저시력, 색약 등)을 위한 스크린리더 지원,
+                  명확한 대비, 대체 텍스트 제공 등
+                </li>
+              </ul>
+            </li>
+            <li>
+              청각적 접근성
+              <ul>
+                <li>
+                  청각장애인(전맹, 저청력, 색약 등)을 위한 자막, 음성 해설,
+                  오디오 디스크립션 제공 등
+                </li>
+              </ul>
+            </li>
+            <li>
+              지체적 접근성
+              <ul>
+                <li>
+                  지체장애인(장애인, 노인 등)을 위한 키보드 접근성, 키보드
+                  포커스 순서, 키보드 접근성 테스트 등
+                </li>
+              </ul>
+            </li>
+            <li>
+              인지적 접근성
+              <ul>
+                <li>
+                  인지장애인(전맹, 저인지력, 색약 등)을 위한 명확한 레이아웃,
+                  명확한 대비, 대체 텍스트 제공 등
+                </li>
+              </ul>
+            </li>
+            <li>
+              기술적 접근성
+              <ul>
+                <li>다양한 기기(PC, 모바일, 보조기기 등)와 호환 제공</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>웹 접근성 지원 방법</h2>
+          <ul>
+            <li>
+              대체 텍스트 제공
+              <ul>
+                <li>이미지, 아이콘 등에 의미 있는 대체 텍스트 작성</li>
+              </ul>
+            </li>
+            <li>
+              키보드 내비게이션 지원
+              <ul>
+                <li>
+                  Tab, Shift+Tab, Enter, Space 등으로 모든 기능 접근 가능하게
+                  구현
+                </li>
+              </ul>
+            </li>
+            <li>
+              명확한 구조와 시맨틱 마크업
+              <ul>
+                <li>
+                  제목(h1~h6), 목록(ul, ol), 버튼(button), 링크(a) 등 HTML
+                  시맨틱 태그 사용
+                </li>
+              </ul>
+            </li>
+            <li>
+              충분한 색상 대비
+              <ul>
+                <li>텍스트와 배경의 명도 차이 확보(최소 4.5:1 이상 권장)</li>
+              </ul>
+            </li>
+            <li>
+              자막 및 대체 콘텐츠 제공
+              <ul>
+                <li>동영상, 오디오 등에는 자막, 대본, 수어 영상 등 제공</li>
+              </ul>
+            </li>
+            <li>
+              ARIA 속성 활용
+              <ul>
+                <li>WAI-ARIA 속성으로 보조기기 사용자에게 추가 정보 제공</li>
+              </ul>
+            </li>
+            <li>
+              자동 재생, 깜빡임 등 자제
+              <ul>
+                <li>
+                  자동 재생, 빠른 깜빡임 등은 피하고, 사용자가 제어할 수 있게 함
+                </li>
+              </ul>
+            </li>
+            <li>
+              에러 및 안내 메시지 제공
+              <ul>
+                <li>
+                  입력 오류, 성공/실패 안내 등은 명확하게 시각·청각적으로 제공
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>웹 접근성 표준 및 참고 자료</h2>
+          <ul>
+            <li>
+              <a href="https://www.w3.org/TR/WCAG21/" target="_blank"
+                >WCAG(Web Content Accessibility Guidelines)</a
+              >
+              <ul>
+                <li>
+                  웹 표준 개발 국제 조직 W3C(World Wide Web Consortium)에서
+                  발표한 웹 콘텐츠 접근성 지침
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&cpage=1&nb_type=6&kcs_select0=ALL&kcs_select1=ALL&kcs_select2=%C1%A4%BA%B8%B1%E2%BC%FA&searchCon=nb_name&searchTxt=%C1%A2%B1%D9%BC%BA"
+                target="_blank"
+                >KWCAG(한국형 웹 콘텐츠 접근성 지침)</a
+              >
+              <ul>
+                <li>국립전파연구원의 WCAG를 인용 표준 한국형 웹 접근성</li>
+              </ul>
+            </li>
+            <li>
+              <a href="https://www.w3.org/WAI/" target="_blank">W3C WAI</a>
+            </li>
+            <li>
+              <a
+                href="https://accessibility.naver.com/accessibility"
+                target="_blank"
+                >NAVER 접근성 가이드</a
+              >
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>결론</h2>
+          <ul>
+            <li>웹 접근성은 모두를 위한 웹을 만드는 기본이자 필수 요소</li>
+            <li>개발, 디자인, 기획 등 모든 단계에서 접근성을 고려해야 함</li>
+            <li>
+              접근성은 소수만을 위한 것이 아니라, 모두의 더 나은 경험을 위한 것
+            </li>
+            <li>웹 접근성은 누구에게나 도움이 됩니다.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: false,
+        transition: "slide",
+        backgroundTransition: "fade",
+      });
+    </script>
+  </body>
+</html>
